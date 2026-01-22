@@ -1,0 +1,22 @@
+baseURL = 'https://wladimirtrubizin.com/'
+languageCode = 'en-us'
+title = "Wladimir's Notes"
+theme = 'PaperMod'
+
+[outputs]
+home = ['HTML', 'JSON']
+
+[params]
+description = 'A blog about technology, projects, startup insights, and freelancing'
+author = 'Wladimir Trubizin'
+defaultTheme = 'auto'
+showtoc = true
+tocopen = false
+
+[[params.socialIcons]]
+name = 'github'
+url = 'https://github.com/AC4G'
+
+[[params.socialIcons]]
+name = 'linkedin'
+url = 'https://linkedin.com/in/wladimir-trubizin-44394a369'
