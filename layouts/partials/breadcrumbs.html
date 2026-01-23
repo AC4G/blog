@@ -1,10 +1,10 @@
 <!-- Breadcrumbs Navigation -->
 {{ if not .IsHome }}
 <div class="breadcrumbs">
-  <a href="{{ .Site.BaseURL }}">Home</a>
+  <a href="{{ "" | relLangURL }}">Home</a>
   {{ if .Section }}
   <span>/</span>
-  <a href="{{ .Site.BaseURL }}{{ .Section }}/">{{ humanize .Section }}</a>
+  <a href="{{ "" | relLangURL }}{{ .Section }}/">{{ humanize .Section }}</a>
   {{ end }}
   {{ if not .IsSection }}
   <span>/</span>

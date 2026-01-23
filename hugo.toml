@@ -38,7 +38,7 @@ system = 'utterances'
 repo = "AC4G/blog"
 issueTerm = "pathname"
 theme = "github-light"
-darkTheme = "photon-dark"
+darkTheme = "github-dark"
 
 # Newsletter
 [params.newsletter]
