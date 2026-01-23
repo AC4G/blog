@@ -107,19 +107,6 @@
 </header>
 
 <script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
-
-    document.getElementById('translate-toggle').addEventListener('click', function () {
-        var dropdown = document.getElementById('google_translate_element');
-        dropdown.classList.toggle('show');
-    });
-
     // Close dropdown when clicking outside
     document.addEventListener('click', function (e) {
         var wrapper = document.querySelector('.translate-wrapper');
