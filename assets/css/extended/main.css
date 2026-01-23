@@ -254,8 +254,12 @@ svg {
   margin-top: 0;
   margin-bottom: 0.5rem;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+}
+
+.newsletter-form h3 svg {
+  position: relative;
+  top: 4px;
 }
 
 .newsletter-actions {
@@ -263,7 +267,11 @@ svg {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1rem;
+  max-width: 320px;
   /* Reduced space (half) */
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .newsletter-actions a {
