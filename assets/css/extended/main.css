@@ -197,6 +197,10 @@ svg {
   stroke-width: 2;
 }
 
+.like-button.liked svg {
+  fill: currentColor;
+}
+
 .share-btn svg {
   stroke: currentColor;
   width: 16px;
