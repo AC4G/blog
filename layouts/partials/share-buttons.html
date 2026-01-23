@@ -1,0 +1,29 @@
+<!-- Share Buttons -->
+{{ if .IsPage }}
+<div class="share-buttons">
+  {{ $url := .Permalink }}
+  
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}" 
+     class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn">
+    {{ partial "icons/linkedin.svg" }}
+    <span>LinkedIn</span>
+  </a>
+  
+  <button class="share-btn" onclick="copyToClipboard('{{ $url }}')" title="Copy link">
+    {{ partial "icons/link.svg" }}
+    <span>Copy Link</span>
+  </button>
+</div>
+
+<div id="toast" class="toast-notification">Link copied to clipboard!</div>
+
+<script>
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const toast = document.getElementById("toast");
+      toast.className = "toast-notification show";
+      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    });
+  }
+</script>
+{{ end }}

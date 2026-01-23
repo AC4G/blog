@@ -1,0 +1,8 @@
+<!-- Hero Section for Home Page -->
+{{ if .IsHome }}
+<div class="hero-section">
+  <h1>{{ .Site.Title }}</h1>
+  <p>{{ .Site.Params.description }}</p>
+  <a href="{{ .Permalink }}posts/" class="hero-cta">Start Reading</a>
+</div>
+{{ end }}

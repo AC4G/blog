@@ -1,0 +1,12 @@
+<!-- Utterances Comments Section -->
+{{ if .Site.Params.comments.enabled }}
+<div class="comments-section" style="margin-top: 3rem;">
+  <script src="https://utteranc.es/client.js"
+    repo="{{ .Site.Params.utterances.repo }}"
+    issue-term="{{ .Site.Params.utterances.issueTerm }}"
+    theme="{{ if (eq (.Site.Params.colors.scheme | default "auto") "dark") }}{{ .Site.Params.utterances.darkTheme }}{{ else }}{{ .Site.Params.utterances.theme }}{{ end }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+{{ end }}

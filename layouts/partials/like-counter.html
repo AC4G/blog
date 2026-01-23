@@ -1,0 +1,82 @@
+<!-- Like Counter for Posts -->
+{{ if .IsPage }}
+<div class="like-section" style="margin: 2rem 0;">
+  <button class="like-button" id="likeBtn" onclick="toggleLike()" title="Like this post">
+    {{ partial "icons/heart.svg" }}
+    <span class="like-count" id="likeCount">0</span>
+  </button>
+</div>
+
+<script>
+  // CounterAPI Integration
+  const namespace = 'wladimirs-notes-blog';
+  const key = '{{ md5 .Permalink }}';
+  const likeBtn = document.getElementById('likeBtn');
+  const likeCount = document.getElementById('likeCount');
+  const localKey = 'liked_' + key;
+
+  // Base URL for CounterAPI
+  const baseUrl = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+
+  function updateUI(count) {
+    likeCount.textContent = count;
+  }
+
+  function setLikedState(isLiked) {
+    if (isLiked) {
+      likeBtn.classList.add('liked');
+    } else {
+      likeBtn.classList.remove('liked');
+    }
+  }
+
+  async function loadLikes() {
+    // Check local state for the heart color
+    const isLiked = localStorage.getItem(localKey) === 'true';
+    setLikedState(isLiked);
+
+    try {
+      // Fetch current count (read-only)
+      const response = await fetch(`${baseUrl}/`);
+      if (response.ok) {
+        const data = await response.json();
+        updateUI(data.count);
+      } else {
+        // If key doesn't exist yet (404), it starts at 0
+        updateUI(0);
+      }
+    } catch (error) {
+      console.warn('Failed to load likes:', error);
+    }
+  }
+
+  async function toggleLike() {
+    const isLiked = localStorage.getItem(localKey) === 'true';
+
+    // Optimistic UI update
+    let currentCount = parseInt(likeCount.textContent) || 0;
+    if (isLiked) {
+      updateUI(Math.max(0, currentCount - 1));
+      setLikedState(false);
+      localStorage.removeItem(localKey);
+
+      // API Call: Down
+      try {
+        await fetch(`${baseUrl}/down`);
+      } catch (e) { console.error(e); }
+
+    } else {
+      updateUI(currentCount + 1);
+      setLikedState(true);
+      localStorage.setItem(localKey, 'true');
+
+      // API Call: Up
+      try {
+        await fetch(`${baseUrl}/up`);
+      } catch (e) { console.error(e); }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadLikes);
+</script>
+{{ end }}

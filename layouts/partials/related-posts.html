@@ -1,0 +1,24 @@
+<!-- Related Posts -->
+{{ if .IsPage }}
+{{ $pageTags := .GetTerms "tags" }}
+{{ if $pageTags }}
+  {{ $relatedPages := (where .Site.RegularPages "Tags" "intersect" $pageTags) | first 4 }}
+  {{ if gt (len $relatedPages) 1 }}
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul class="related-posts-list">
+      {{ range $relatedPages }}
+        {{ if ne .Permalink $.Permalink }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          <small style="display: block; margin-top: 0.25rem; opacity: 0.7;">
+            {{ .PublishDate.Format "Jan 2, 2006" }} • {{ .ReadingTime }} min read
+          </small>
+        </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+{{ end }}
+{{ end }}

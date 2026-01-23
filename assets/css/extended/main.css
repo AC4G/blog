@@ -1,0 +1,598 @@
+/* Custom branding and styling */
+:root {
+  --primary: #111111;
+  --primary-light: #444444;
+  --accent: #666666;
+  --success: #333333;
+}
+
+/* Dark mode overrides */
+:root[data-theme="dark"] {
+  --primary: #f5f5f5;
+  --primary-light: #d4d4d4;
+  --accent: #a3a3a3;
+  --success: #525252;
+}
+
+/* Common Card Style */
+.card-section,
+.share-buttons {
+  background: #f5f5f5;
+  color: #111111;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid #e5e5e5;
+}
+
+:root[data-theme="dark"] .card-section,
+:root[data-theme="dark"] .share-buttons {
+  background: #1d1e20;
+  color: #ffffff;
+  border-color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+  background: #f5f5f5;
+  color: #111111;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+  border: 1px solid #e5e5e5;
+}
+
+:root[data-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, #1f1f1f 0%, #111111 100%);
+  color: #ffffff;
+  border-color: #333;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: #111111;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+:root[data-theme="dark"] .hero-cta {
+  background: #ffffff;
+  color: #111111;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Like Counter Button */
+.like-section {
+  margin: 2rem 0;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: #f5f5f5;
+  /* Match observed tag bg */
+  color: #333;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  /* Match observed tag radius */
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  min-width: auto;
+  height: auto;
+  font-size: 0.85rem;
+}
+
+:root[data-theme="dark"] .like-button {
+  background: #2e2e33;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+.like-button:hover {
+  background: #e5e5e5;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] .like-button:hover {
+  background: #444;
+}
+
+.like-button.liked {
+  background: #e5e5e5;
+  border-color: #999;
+  color: #000;
+}
+
+:root[data-theme="dark"] .like-button.liked {
+  background: #444;
+  border-color: #666;
+  color: #fff;
+}
+
+.like-count {
+  font-size: 0.9rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+/* SVG Icon styling */
+.like-button svg {
+  width: 14px;
+  /* Slightly smaller for tag style */
+  height: 14px;
+  stroke-width: 2;
+  stroke: currentColor;
+}
+
+/* SVG Icon styling */
+svg {
+  display: inline-block;
+  vertical-align: -0.125em;
+  margin-right: 0.4rem;
+  flex-shrink: 0;
+}
+
+.meta-item svg {
+  vertical-align: middle;
+  margin-right: 0.3rem;
+  /* Reduced from 0.5rem */
+  stroke: var(--primary-light);
+  position: relative;
+  top: -1px;
+}
+
+:root[data-theme="dark"] .meta-item svg {
+  stroke: var(--primary);
+}
+
+.like-button svg {
+  stroke: currentColor;
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.share-btn svg {
+  stroke: currentColor;
+  width: 16px;
+  height: 16px;
+}
+
+/* Share Buttons */
+.share-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  color: #111;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+:root[data-theme="dark"] .share-btn {
+  border-color: #555;
+  color: #f5f5f5;
+}
+
+.share-btn:hover {
+  background: #111;
+  color: white;
+}
+
+:root[data-theme="dark"] .share-btn:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* Newsletter Signup */
+.newsletter-form {
+  background: #f5f5f5;
+  color: #111;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 3rem 0;
+  border: 1px solid #e5e5e5;
+}
+
+:root[data-theme="dark"] .newsletter-form {
+  background: #1d1e20;
+  color: #f5f5f5;
+  border-color: #333;
+}
+
+.newsletter-form h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.newsletter-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  /* Reduced space (half) */
+}
+
+.newsletter-actions a {
+  flex: 1;
+  min-width: 150px;
+  text-decoration: none !important;
+}
+
+.newsletter-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+/* RSS Button (Primary) */
+.btn-rss {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+}
+
+.btn-rss:hover {
+  background: #333;
+  border-color: #333;
+}
+
+:root[data-theme="dark"] .btn-rss {
+  background: #f5f5f5;
+  color: #111;
+  border-color: #f5f5f5;
+}
+
+:root[data-theme="dark"] .btn-rss:hover {
+  background: #ddd;
+}
+
+/* Discuss Button (Secondary/High Contrast) */
+.btn-discuss {
+  background: #fff;
+  color: #111;
+  border: 1px solid #111;
+}
+
+.btn-discuss:hover {
+  background: #f0f0f0;
+}
+
+:root[data-theme="dark"] .btn-discuss {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+:root[data-theme="dark"] .btn-discuss:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Ensure links in newsletter form (if any) are visible */
+.newsletter-form a {
+  color: #111;
+  text-decoration: underline;
+}
+
+:root[data-theme="dark"] .newsletter-form a {
+  color: #fff;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  align-items: center;
+}
+
+.breadcrumbs a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+:root[data-theme="dark"] .breadcrumbs a {
+  color: var(--primary);
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Post Meta */
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  align-items: center;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1;
+}
+
+.meta-item svg {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  stroke: var(--primary-light);
+  position: relative;
+  top: -1px;
+}
+
+:root[data-theme="dark"] .meta-item svg {
+  stroke: var(--primary);
+}
+
+/* Post Tags */
+.post-tags {
+  margin-top: 1rem;
+}
+
+.post-tag {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+:root[data-theme="dark"] .post-tag {
+  background: #2e2e33;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+.post-tag:hover {
+  background: #e5e5e5;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] .post-tag:hover {
+  background: #444;
+}
+
+/* Related Posts */
+.related-posts {
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 3rem 0;
+  border: 1px solid #eee;
+}
+
+:root[data-theme="dark"] .related-posts {
+  background: #1d1e20;
+  border-color: #333;
+}
+
+.related-posts h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+:root[data-theme="dark"] .related-posts h3 {
+  color: #fff;
+}
+
+.related-posts-list {
+  list-style: none;
+  padding: 0;
+}
+
+.related-posts-list li {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.related-posts-list li:last-child {
+  border-bottom: none;
+}
+
+:root[data-theme="dark"] .related-posts-list li {
+  border-color: #333;
+}
+
+.related-posts-list a {
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+:root[data-theme="dark"] .related-posts-list a {
+  color: #ccc;
+}
+
+.related-posts-list a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+:root[data-theme="dark"] .related-posts-list a:hover {
+  color: #fff;
+}
+
+/* Search */
+.search-container {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+}
+
+:root[data-theme="dark"] .search-input {
+  background: #2e2e33;
+  color: #fff;
+  border-color: #444;
+}
+
+.search-results {
+  margin-top: 1.5rem;
+}
+
+/* Images - Lazy loading and optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  transition: transform 0.2s;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+/* Code block styling */
+code {
+  background: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  color: #d14;
+}
+
+pre code {
+  background: #272822;
+  /* Monokai-ish for consistency */
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+:root[data-theme="dark"] code {
+  background: #333;
+  color: #ff79c6;
+}
+
+:root[data-theme="dark"] pre code {
+  background: #111;
+}
+
+/* Toast Notification */
+.toast-notification {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s, bottom 0.3s;
+}
+
+:root[data-theme="dark"] .toast-notification {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.toast-notification.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px;
+}
+
+/* Dark mode adjustments - General */
+:root[data-theme="dark"] body {
+  color: #e5e5e5;
+  background-color: #121212;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .share-buttons {
+    gap: 0.5rem;
+  }
+
+  .share-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .newsletter-form {
+    padding: 1.5rem;
+  }
+}

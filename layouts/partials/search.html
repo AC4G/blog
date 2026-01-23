@@ -1,0 +1,27 @@
+<!-- Search functionality with Fuse.js -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+<script>
+  let searchIndex = null;
+  let searchData = [];
+
+  async function initSearch() {
+    try {
+      const response = await fetch('{{ .Site.BaseURL }}index.json');
+      searchData = await response.json();
+      searchIndex = new Fuse(searchData, {
+        keys: ['title', 'description', 'content', 'tags'],
+        includeScore: true,
+        threshold: 0.3
+      });
+    } catch (error) {
+      console.error('Error initializing search:', error);
+    }
+  }
+
+  function performSearch(query) {
+    if (!query || !searchIndex) return [];
+    return searchIndex.search(query).map(result => result.item);
+  }
+
+  document.addEventListener('DOMContentLoaded', initSearch);
+</script>

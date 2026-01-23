@@ -2,9 +2,11 @@ baseURL = 'https://wladimirtrubizin.com/'
 languageCode = 'en-us'
 title = "Wladimir's Notes"
 theme = 'PaperMod'
+enableInlineShortcodes = true
+enableRobotsTXT = true
 
 [outputs]
-home = ['HTML', 'JSON']
+home = ['HTML', 'JSON', 'RSS']
 
 [params]
 description = 'A blog about technology, projects, startup insights, and freelancing'
@@ -12,6 +14,29 @@ author = 'Wladimir Trubizin'
 defaultTheme = 'auto'
 showtoc = true
 tocopen = false
+ShowReadingTime = true
+ShowBreadCrumbs = true
+ShowPostNavLinks = true
+ShowShareButtons = true
+
+# Search
+[params.search]
+enable = true
+
+# Utterances Comments
+[params.comments]
+enabled = true
+system = 'utterances'
+
+[params.utterances]
+repo = 'AC4G/blog'
+issueTerm = 'pathname'
+theme = 'github-light'
+darkTheme = 'github-dark'
+
+# Newsletter
+[params.newsletter]
+email = 'wladimir'
 
 [[params.socialIcons]]
 name = 'github'
@@ -20,3 +45,7 @@ url = 'https://github.com/AC4G'
 [[params.socialIcons]]
 name = 'linkedin'
 url = 'https://linkedin.com/in/wladimir-trubizin-44394a369'
+
+[[params.socialIcons]]
+name = 'rss'
+url = 'index.xml'
