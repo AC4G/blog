@@ -36,7 +36,7 @@ system = 'giscus'
 
 [params.giscus]
 repo = "AC4G/blog"
-repoId = "76955327"
+repoId = "R_kgDOQ_P65A"
 category = "Announcements"
 categoryId = "DIC_kwDOQ_P65M4C1Vg9"
 mapping = "pathname"
