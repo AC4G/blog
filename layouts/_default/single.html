@@ -1,42 +1,38 @@
 {{ define "main" }}
-  <article class="post-single">
-    <header class="post-header">
-      {{ partial "breadcrumbs.html" . }}
-      
-      <h1 class="post-title">
-        {{ .Title }}
-      </h1>
-      
-      <div class="post-meta">
-        <span class="meta-item">{{ partial "icons/calendar.svg" }} {{ .PublishDate.Format "Jan 2, 2006" }}</span>
-        {{ if .ReadingTime }}
-        <span class="meta-item">{{ partial "icons/clock.svg" }} {{ .ReadingTime }} min read</span>
-        {{ end }}
-        {{ if .Params.author }}
-        <span class="meta-item">{{ .Params.author }}</span>
-        {{ end }}
-      </div>
+<article class="post-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
 
-      {{ if .Params.tags }}
-      <div class="post-tags" style="margin-top: 1rem;">
-        {{ range .Params.tags }}
-          <a href="{{ `/tags/` | relLangURL }}{{ . | urlize }}" class="post-tag">
-            #{{ . }}
-          </a>
-        {{ end }}
-      </div>
+    <h1 class="post-title">
+      {{ .Title }}
+    </h1>
+
+    <div class="post-meta">
+      <span class="meta-item">{{ partial "icons/calendar.svg" }} {{ .PublishDate.Format "Jan 2, 2006" }}</span>
+      {{ if .ReadingTime }}
+      <span class="meta-item">{{ partial "icons/clock.svg" }} {{ .ReadingTime }} min read</span>
       {{ end }}
-    </header>
-
-    {{ partial "share-buttons.html" . }}
-
-    <div class="post-content">
-      {{ .Content }}
+      <span class="meta-item">{{ partial "icons/user.svg" }}{{ .Params.author | default site.Params.author }}</span>
     </div>
 
-    {{ partial "like-counter.html" . }}
-    {{ partial "related-posts.html" . }}
-    {{ partial "newsletter.html" . }}
-    {{ partial "comments.html" . }}
-  </article>
+    {{ if .Params.tags }}
+    <div class="post-tags" style="margin-top: 1rem;">
+      {{ range .Params.tags }}
+      <a href="{{ `/tags/` | relLangURL }}{{ . | urlize }}" class="post-tag">
+        #{{ . }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  {{ partial "share-buttons.html" . }}
+  {{ partial "related-posts.html" . }}
+  {{ partial "newsletter.html" . }}
+  {{ partial "comments.html" . }}
+</article>
 {{ end }}

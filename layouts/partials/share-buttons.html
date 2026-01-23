@@ -1,18 +1,66 @@
 <!-- Share Buttons -->
 {{ if .IsPage }}
-<div class="share-buttons">
-  {{ $url := .Permalink }}
-  
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}" 
-     class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn">
-    {{ partial "icons/linkedin.svg" }}
-    <span>LinkedIn</span>
-  </a>
-  
-  <button class="share-btn" onclick="copyToClipboard('{{ $url }}')" title="Copy link">
-    {{ partial "icons/link.svg" }}
-    <span>Copy Link</span>
-  </button>
+<div class="share-buttons" style="flex-direction: column; align-items: center; text-align: center;">
+
+  <!-- Like Button (Integrated) -->
+  <div class="like-section" style="margin: 0 0 1rem 0;">
+    <button class="like-button" id="likeBtn" onclick="toggleLike()" title="Like this post">
+      {{ partial "icons/heart.svg" }}
+      <span>Star this post</span>
+      <span class="like-count" id="likeCount">0</span>
+    </button>
+  </div>
+
+  <div style="width: 100%; height: 1px; background: #e5e5e5; margin: 0.5rem 0 1.5rem 0; opacity: 0.5;"></div>
+
+  <h4 style="margin: 0 0 1rem 0; font-size: 1rem; font-weight: 600; color: var(--primary);">If you found this post
+    helpful, I'd be grateful if you shared it</h4>
+
+  <!-- Share Links -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
+    {{ $url := .Permalink }}
+
+    <a href="https://x.com/intent/tweet/?text={{ .Title | urlquery }}&url=https://wladimirtrubizin.com{{ .RelPermalink }}"
+      class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on X">
+      {{ partial "icons/x.svg" }}
+      <span>X</span>
+    </a>
+
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://wladimirtrubizin.com{{ .RelPermalink }}"
+      class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn">
+      {{ partial "icons/linkedin.svg" }}
+      <span>LinkedIn</span>
+    </a>
+
+    <a href="https://reddit.com/submit?url=https://wladimirtrubizin.com{{ .RelPermalink }}&title={{ .Title | urlquery }}"
+      class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on Reddit">
+      {{ partial "icons/reddit.svg" }}
+      <span>Reddit</span>
+    </a>
+
+    <a href="https://facebook.com/sharer/sharer.php?u=https://wladimirtrubizin.com{{ .RelPermalink }}" class="share-btn"
+      target="_blank" rel="noopener noreferrer" title="Share on Facebook">
+      {{ partial "icons/facebook.svg" }}
+      <span>Facebook</span>
+    </a>
+
+    <a href="https://api.whatsapp.com/send?text={{ .Title | urlquery }}%20-%20https://wladimirtrubizin.com{{ .RelPermalink }}"
+      class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on WhatsApp">
+      {{ partial "icons/whatsapp.svg" }}
+      <span>WhatsApp</span>
+    </a>
+
+    <a href="https://telegram.me/share/url?text={{ .Title | urlquery }}&url=https://wladimirtrubizin.com{{ .RelPermalink }}"
+      class="share-btn" target="_blank" rel="noopener noreferrer" title="Share on Telegram">
+      {{ partial "icons/telegram.svg" }}
+      <span>Telegram</span>
+    </a>
+
+    <button class="share-btn" onclick="copyToClipboard('{{ $url }}')" title="Copy link">
+      {{ partial "icons/link.svg" }}
+      <span>Copy Link</span>
+    </button>
+  </div>
 </div>
 
 <div id="toast" class="toast-notification">Link copied to clipboard!</div>
@@ -22,8 +70,84 @@
     navigator.clipboard.writeText(text).then(() => {
       const toast = document.getElementById("toast");
       toast.className = "toast-notification show";
-      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+      setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
     });
   }
+
+  // Like Button Logic
+  const namespace = 'wladimirs-notes-blog';
+  const key = '{{ md5 .Permalink }}';
+  const likeBtn = document.getElementById('likeBtn');
+  const likeCount = document.getElementById('likeCount');
+  const localKey = 'liked_' + key;
+  const baseUrl = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+
+  function updateUI(count) {
+    if (likeCount) likeCount.textContent = count;
+  }
+
+  function setLikedState(isLiked) {
+    if (!likeBtn) return;
+    if (isLiked) {
+      likeBtn.classList.add('liked');
+    } else {
+      likeBtn.classList.remove('liked');
+    }
+  }
+
+  async function loadLikes() {
+    if (!likeBtn) return;
+    const isLiked = localStorage.getItem(localKey) === 'true';
+    setLikedState(isLiked);
+    try {
+      const response = await fetch(`${baseUrl}/`);
+      if (response.ok) {
+        const data = await response.json();
+        updateUI(data.count);
+      } else {
+        updateUI(0);
+      }
+    } catch (error) {
+      console.warn('Failed to load likes:', error);
+    }
+  }
+
+  async function toggleLike() {
+    if (!likeBtn) return;
+    const isLiked = localStorage.getItem(localKey) === 'true';
+    let currentCount = parseInt(likeCount.textContent) || 0;
+
+    if (isLiked) {
+      updateUI(Math.max(0, currentCount - 1));
+      setLikedState(false);
+      localStorage.removeItem(localKey);
+
+      // Track unlike event
+      if (typeof posthog !== 'undefined') {
+        posthog.capture('post_unliked', {
+          post_title: '{{ .Title }}',
+          post_url: '{{ .Permalink }}'
+        });
+      }
+
+      try { await fetch(`${baseUrl}/down`); } catch (e) { console.error(e); }
+    } else {
+      updateUI(currentCount + 1);
+      setLikedState(true);
+      localStorage.setItem(localKey, 'true');
+
+      // Track like event
+      if (typeof posthog !== 'undefined') {
+        posthog.capture('post_liked', {
+          post_title: '{{ .Title }}',
+          post_url: '{{ .Permalink }}'
+        });
+      }
+
+      try { await fetch(`${baseUrl}/up`); } catch (e) { console.error(e); }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadLikes);
 </script>
 {{ end }}

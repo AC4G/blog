@@ -1,33 +1,34 @@
 {{ define "main" }}
-  {{ partial "hero.html" . }}
-  {{ partial "search.html" . }}
-  
-  <div class="posts">
-    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
-    {{ range $paginator.Pages }}
-      <article class="post-entry">
-        <header class="entry-header">
-          <h2 class="entry-title">
-            <a href="{{ .Permalink }}" aria-label="{{ .Title }}">{{ .Title }}</a>
-          </h2>
-        </header>
-        <section class="entry-content">
-          <p>{{ .Summary }}</p>
-        </section>
-        <footer class="entry-footer">
-          <span class="entry-meta">
-            {{ .PublishDate.Format "Jan 2, 2006" }} • {{ .ReadingTime }} min read
-            {{ if .Params.tags }}
-              {{ range .Params.tags }}
-              <a href="{{ `/tags/` | relLangURL }}{{ . | urlize }}">#{{ . }}</a>
-              {{ end }}
-            {{ end }}
-          </span>
-        </footer>
-        <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .Permalink }}"></a>
-      </article>
-    {{ end }}
-  </div>
+{{ partial "hero.html" . }}
+{{ partial "search.html" . }}
 
-  {{ partial "pagination.html" . }}
+<div class="posts">
+  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
+  {{ range $paginator.Pages }}
+  <article class="post-entry">
+    <header class="entry-header">
+      <h2 class="entry-title">
+        <a href="{{ .RelPermalink }}" aria-label="{{ .Title }}">{{ .Title }}</a>
+      </h2>
+    </header>
+    <section class="entry-content">
+      <p>{{ .Summary }}</p>
+    </section>
+    <footer class="entry-footer">
+      <span class="entry-meta">
+        {{ .PublishDate.Format "Jan 2, 2006" }} • {{ .ReadingTime }} min read • {{ .Params.author | default
+        site.Params.author }}
+        {{ if .Params.tags }}
+        {{ range .Params.tags }}
+        <a href="{{ `/tags/` | relLangURL }}{{ . | urlize }}">#{{ . }}</a>
+        {{ end }}
+        {{ end }}
+      </span>
+    </footer>
+    <a class="entry-link" aria-label="post link to {{ .Title }}" href="{{ .RelPermalink }}"></a>
+  </article>
+  {{ end }}
+</div>
+
+{{ partial "pagination.html" . }}
 {{ end }}

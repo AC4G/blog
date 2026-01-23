@@ -16,7 +16,11 @@
 
 /* Common Card Style */
 .card-section,
-.share-buttons {
+.share-buttons,
+.post-entry,
+.comments-section,
+.newsletter-form,
+.related-posts {
   background: #f5f5f5;
   color: #111111;
   padding: 2rem;
@@ -26,10 +30,27 @@
 }
 
 :root[data-theme="dark"] .card-section,
-:root[data-theme="dark"] .share-buttons {
+:root[data-theme="dark"] .share-buttons,
+:root[data-theme="dark"] .post-entry,
+:root[data-theme="dark"] .comments-section,
+:root[data-theme="dark"] .newsletter-form,
+:root[data-theme="dark"] .related-posts {
   background: #1d1e20;
   color: #ffffff;
   border-color: #333;
+}
+
+.post-entry {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-entry:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme="dark"] .post-entry:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Hero Section */
@@ -91,25 +112,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  background: #f5f5f5;
-  /* Match observed tag bg */
-  color: #333;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  /* Match observed tag radius */
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
   min-width: auto;
   height: auto;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 :root[data-theme="dark"] .like-button {
-  background: #2e2e33;
+  border-color: #555;
   color: #f5f5f5;
-  border-color: #444;
+  background: #2e2e33;
 }
 
 .like-button:hover {
@@ -120,6 +139,7 @@
 
 :root[data-theme="dark"] .like-button:hover {
   background: #444;
+  color: #f5f5f5;
 }
 
 .like-button.liked {
@@ -158,12 +178,12 @@ svg {
 }
 
 .meta-item svg {
+  width: 16px;
+  height: 16px;
   vertical-align: middle;
   margin-right: 0.3rem;
-  /* Reduced from 0.5rem */
   stroke: var(--primary-light);
-  position: relative;
-  top: -1px;
+  flex-shrink: 0;
 }
 
 :root[data-theme="dark"] .meta-item svg {
@@ -199,7 +219,7 @@ svg {
   padding: 0.5rem 0.75rem;
   border: 1px solid #ccc;
   color: #111;
-  background: transparent;
+  background: #fff;
   border-radius: 4px;
   font-size: 0.9rem;
   text-decoration: none;
@@ -210,34 +230,22 @@ svg {
 :root[data-theme="dark"] .share-btn {
   border-color: #555;
   color: #f5f5f5;
+  background: #2e2e33;
 }
 
 .share-btn:hover {
-  background: #111;
-  color: white;
+  background: #e5e5e5;
+  color: #000;
+  transform: translateY(-1px);
 }
 
 :root[data-theme="dark"] .share-btn:hover {
-  background: #f5f5f5;
-  color: #111;
+  background: #444;
+  color: #f5f5f5;
 }
 
 /* Newsletter Signup */
-.newsletter-form {
-  background: #f5f5f5;
-  color: #111;
-  padding: 2rem;
-  border-radius: 8px;
-  margin: 3rem 0;
-  border: 1px solid #e5e5e5;
-}
-
-:root[data-theme="dark"] .newsletter-form {
-  background: #1d1e20;
-  color: #f5f5f5;
-  border-color: #333;
-}
-
+/* Newsletter individual styles handled in common cards */
 .newsletter-form h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -272,46 +280,54 @@ svg {
 
 /* RSS Button (Primary) */
 .btn-rss {
-  background: #111;
-  color: #fff;
-  border: 1px solid #111;
-}
-
-.btn-rss:hover {
-  background: #333;
-  border-color: #333;
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
 }
 
 :root[data-theme="dark"] .btn-rss {
-  background: #f5f5f5;
-  color: #111;
-  border-color: #f5f5f5;
+  border-color: #555;
+  color: #f5f5f5;
+  background: #2e2e33;
+}
+
+.btn-rss:hover {
+  background: #e5e5e5;
+  color: #000;
+  border-color: #e5e5e5;
+  transform: translateY(-1px);
 }
 
 :root[data-theme="dark"] .btn-rss:hover {
-  background: #ddd;
+  background: #444;
+  color: #f5f5f5;
+  border-color: #444;
 }
 
 /* Discuss Button (Secondary/High Contrast) */
 .btn-discuss {
   background: #fff;
   color: #111;
-  border: 1px solid #111;
+  border: 1px solid #ccc;
 }
 
 .btn-discuss:hover {
-  background: #f0f0f0;
+  background: #e5e5e5;
+  color: #000;
+  border-color: #e5e5e5;
+  transform: translateY(-1px);
 }
 
 :root[data-theme="dark"] .btn-discuss {
-  background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  background: #2e2e33;
+  color: #f5f5f5;
+  border-color: #555;
 }
 
 :root[data-theme="dark"] .btn-discuss:hover {
-  background: #fff;
-  color: #000;
+  background: #444;
+  color: #f5f5f5;
+  border-color: #444;
 }
 
 /* Ensure links in newsletter form (if any) are visible */
@@ -363,16 +379,10 @@ svg {
   align-items: center;
   gap: 0.5rem;
   line-height: 1;
+  white-space: nowrap;
 }
 
-.meta-item svg {
-  vertical-align: middle;
-  margin-right: 0.5rem;
-  stroke: var(--primary-light);
-  position: relative;
-  top: -1px;
-}
-
+/* Meta icons consolidated above */
 :root[data-theme="dark"] .meta-item svg {
   stroke: var(--primary);
 }
@@ -412,19 +422,7 @@ svg {
 }
 
 /* Related Posts */
-.related-posts {
-  background: #f9f9f9;
-  padding: 2rem;
-  border-radius: 8px;
-  margin: 3rem 0;
-  border: 1px solid #eee;
-}
-
-:root[data-theme="dark"] .related-posts {
-  background: #1d1e20;
-  border-color: #333;
-}
-
+/* Related posts individual styles handled in common cards */
 .related-posts h3 {
   margin-top: 0;
   color: var(--primary);

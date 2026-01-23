@@ -19,6 +19,12 @@ ShowBreadCrumbs = true
 ShowPostNavLinks = true
 ShowShareButtons = true
 
+[params.assets]
+favicon = "favicon.png"
+favicon16x16 = "favicon.png"
+favicon32x32 = "favicon.png"
+apple_touch_icon = "favicon.png"
+
 # Search
 [params.search]
 enable = true
@@ -29,10 +35,10 @@ enabled = true
 system = 'utterances'
 
 [params.utterances]
-repo = 'AC4G/blog'
-issueTerm = 'pathname'
-theme = 'github-light'
-darkTheme = 'github-dark'
+repo = "AC4G/blog"
+issueTerm = "pathname"
+theme = "github-light"
+darkTheme = "github-dark"
 
 # Newsletter
 [params.newsletter]
@@ -44,7 +50,7 @@ url = 'https://github.com/AC4G'
 
 [[params.socialIcons]]
 name = 'linkedin'
-url = 'https://linkedin.com/in/wladimir-trubizin-44394a369'
+url = 'https://www.linkedin.com/in/wladimir-trubizin-44394a369'
 
 [[params.socialIcons]]
 name = 'rss'
