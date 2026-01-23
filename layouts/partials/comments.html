@@ -6,29 +6,34 @@
     data-category-id="{{ .Site.Params.giscus.categoryId }}" data-mapping="{{ .Site.Params.giscus.mapping }}"
     data-strict="0" data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled }}"
     data-emit-metadata="{{ .Site.Params.giscus.emitMetadata }}"
-    data-input-position="{{ .Site.Params.giscus.inputPosition }}" data-theme="{{ .Site.Params.giscus.theme }}"
+    data-input-position="{{ .Site.Params.giscus.inputPosition }}" data-theme="dark"
     data-lang="{{ .Site.Params.giscus.lang }}" crossorigin="anonymous" async>
     </script>
 </div>
 
 <script>
-  // Giscus theme switcher
-  const giscusTheme = document.querySelector('iframe.giscus-frame');
-
   function setGiscusTheme() {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'dark_high_contrast' : 'light';
     const iframe = document.querySelector('iframe.giscus-frame');
     if (iframe) {
       iframe.contentWindow.postMessage({
         giscus: {
           setConfig: {
-            theme: 'https://wladimirtrubizin.com/css/giscus-custom.css'
+            theme: theme
           }
         }
       }, 'https://giscus.app');
     }
   }
 
-  // Listen for theme changes
+  // Set initial theme after iframe loads
+  window.addEventListener('message', (event) => {
+    if (event.origin === 'https://giscus.app') {
+      setGiscusTheme();
+    }
+  });
+
+  // Listen for theme toggle
   const observer = new MutationObserver(() => {
     setGiscusTheme();
   });
@@ -36,13 +41,6 @@
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme']
-  });
-
-  // Set theme when iframe loads
-  window.addEventListener('message', (event) => {
-    if (event.origin === 'https://giscus.app') {
-      setGiscusTheme();
-    }
   });
 </script>
 {{ end }}

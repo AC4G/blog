@@ -43,7 +43,7 @@ mapping = "pathname"
 reactionsEnabled = "1"
 emitMetadata = "0"
 inputPosition = "bottom"
-theme = "https://wladimirtrubizin.com/css/giscus-custom.css"
+theme = "preferred_color_scheme"
 lang = "en"
 
 # Newsletter
