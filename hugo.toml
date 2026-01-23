@@ -29,16 +29,22 @@ apple_touch_icon = "favicon.png"
 [params.search]
 enable = true
 
-# Utterances Comments
+# Giscus Comments
 [params.comments]
 enabled = true
-system = 'utterances'
+system = 'giscus'
 
-[params.utterances]
+[params.giscus]
 repo = "AC4G/blog"
-issueTerm = "pathname"
-theme = "github-light"
-darkTheme = "github-dark"
+repoId = "76955327"
+category = "Announcements"
+categoryId = "DIC_kwDOQ_P65M4C1Vg9"
+mapping = "pathname"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "bottom"
+theme = "https://wladimirtrubizin.com/css/giscus-custom.css"
+lang = "en"
 
 # Newsletter
 [params.newsletter]
