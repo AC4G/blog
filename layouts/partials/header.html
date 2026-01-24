@@ -105,15 +105,3 @@
         </div>
     </nav>
 </header>
-
-<script>
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function (e) {
-        var wrapper = document.querySelector('.translate-wrapper');
-        var dropdown = document.getElementById('google_translate_element');
-        if (!wrapper.contains(e.target)) {
-            dropdown.classList.remove('show');
-        }
-    });
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
